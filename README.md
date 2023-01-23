@@ -8,4 +8,4 @@ Inicio: 06/01/2023
 
 Cursos:
 
-1. [Curso de React: gerenciamento de estados globais com Redux](https://cursos.alura.com.br/course/react-gerenciamento-estados-globais-redux) Inicio: 06/01/2023 - Fim: --/--/----
+1. [Curso de React: gerenciamento de estados globais com Redux](https://cursos.alura.com.br/course/react-gerenciamento-estados-globais-redux) Inicio: 06/01/2023 - Fim: 23/01/2023
