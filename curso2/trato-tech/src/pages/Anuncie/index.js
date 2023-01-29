@@ -1,16 +1,22 @@
 import Button from "components/Button";
 import Header from "components/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Anuncie.module.scss";
 import { useForm } from 'react-hook-form';
+import { cadastrarItem } from "store/reducers/itens";
 
 
 export default function Anuncie() {
+    const dispatch = useDispatch()
     const categorias = useSelector(state => state.categorias.map(({nome, id}) => ({nome, id})));
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            categoria: ''
+        }
+    });
 
-    function cadastar(parametro) {
-        console.log('parametro: ', parametro)
+    function cadastrar(data) {
+        dispatch(cadastrarItem(data));
     }
 
     return (
@@ -19,11 +25,11 @@ export default function Anuncie() {
                 titulo='Anuncie aqui!'
                 descricao='Anuncie seu produto no melhor site do Brasil!'
             />
-            <form className={styles.formulario} onSubmit={handleSubmit(cadastar)}>
-                <input {...register('nome')} placeholder='Nome do produto' alt='nome do produto' />
-                <input {...register('descricao')} placeholder='Descritação do produto' alt='descrição do produto' />
-                <input {...register('imagem')} placeholder='URL da imagem do produto' alt='descrição da imagem do produto' />
-                <select {...register('categoria')}>
+            <form className={styles.formulario} onSubmit={handleSubmit(cadastrar)}>
+                <input {...register('nome', { required: true})} placeholder='Nome do produto' alt='nome do produto' />
+                <input {...register('descricao', { required: true})} placeholder='Descritação do produto' alt='descrição do produto' />
+                <input {...register('imagem', { required: true})} placeholder='URL da imagem do produto' alt='descrição da imagem do produto' />
+                <select {...register('categoria', { required: true})}>
                     <option value='' disabled> Selecione a Categoria</option>
                     {categorias.map(categoria => (
                         <option key={categoria.id} value={categoria.id}>
@@ -31,7 +37,7 @@ export default function Anuncie() {
                         </option>
                     ))}
                 </select>
-                <input {...register('preco')} type='number' placeholder='Preço do produto'></input>
+                <input {...register('preco', { required: true})} type='number' placeholder='Preço do produto'></input>
                 <Button type='submit'>
                     Cadastrar produto
                 </Button>
