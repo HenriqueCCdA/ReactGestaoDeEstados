@@ -1,17 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
 
 const categoriasSlice = createSlice({
   name: 'categorias',
-  initialState,
+  initialState: [],
   reducers: {
-    adicionarCategorios: (state, {payload}) => {
+    adicionarCategorias: (state, {payload}) => {
       state.push(...payload);
     }
   }
 });
 
-export const { adicionarCategorios } = categoriasSlice.actions;
+export const { adicionarCategorias } = categoriasSlice.actions;
 
 export default categoriasSlice.reducer;
